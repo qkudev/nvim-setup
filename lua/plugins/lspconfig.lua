@@ -7,7 +7,7 @@ return {
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
     local on_attach = function(client)
-      -- lspformat.on_attach(client)
+      lspformat.on_attach(client)
     end
 
     lspconfig["html"].setup({
@@ -31,6 +31,26 @@ return {
           buffer = bufnr,
           command = "EslintFixAll",
         })
+      end,
+    })
+
+    lspconfig.stylelint_lsp.setup({
+      cmd = { "stylelint-lsp", "--stdio" },
+      filetypes = {
+        "css",
+        "less",
+        "scss",
+        "sugarss",
+        "vue",
+      },
+      root_dir = lspconfig.util.root_pattern("package.json", ".git"),
+      settings = {
+        stylelintplus = {
+          -- see available options in stylelint-lsp documentation
+        },
+      },
+      on_attach = function(client)
+        client.server_capabilities.document_formatting = false
       end,
     })
 

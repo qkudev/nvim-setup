@@ -19,7 +19,7 @@ return {
           limit_entries = 20,
         },
         file_ignore_patterns = {
-          "node_modules",
+          -- "node_modules",
           "package%-lock.json",
         },
         mappings = {
