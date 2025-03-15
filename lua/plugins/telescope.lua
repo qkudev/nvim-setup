@@ -4,6 +4,7 @@ return {
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
+    local open_with_trouble = require("trouble.sources.telescope").open
 
     telescope.setup({
       defaults = {
@@ -21,12 +22,14 @@ return {
         file_ignore_patterns = {
           -- "node_modules",
           "package%-lock.json",
+          "yarn.lock",
         },
         mappings = {
           i = {
             ["<C-l>"] = actions.move_selection_previous,
             ["<C-k>"] = actions.move_selection_next,
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+            ["<C-t>"] = open_with_trouble,
           },
         },
         vimgrep_arguments = {
